@@ -1,32 +1,27 @@
 #include<iostream>
-#include<stdio.h>
-#include<vector>
-#include<algorithm>
-
-const int N = 1e5;
 
 using namespace std;
-int main(){	
-	int i, n, q, l, r, v, M; 
-	vector<int> vec(N,0);
-	
-	cin >> n >> q;
 
-	for(i = 0; i < q; i++){
-		cin >> l >> r >> v;
-		
-		vec[l] += v;
-		vec[r+1] -= v;
-	}
-	
-	for(i = 2; i <= n; i++){
-		vec[i] += vec[i-1];
-	}
+const int n = 100;
 
-	for(i = 1; i <= n; i++){
-		vec[i] += i;
-		M = max(M, vec[i]);
-	}
-
-	cout << M;	
+int main(){
+    int N, i, A[n], B[n], sum = 0;
+    
+    cin >> N;
+    for(i = 0; i < N-1; i++)
+        cin >> B[i];
+    
+    A[0] = B[0];
+    A[N-1] = B[N-2];
+    sum += A[0] + A[N-1];
+    
+    for(i = 1; i < N-1; i++){
+        if(B[i]<B[i-1])
+            A[i] = B[i];
+        else
+            A[i] = B[i-1];
+        sum += A[i];
+    }
+    
+    cout << sum;
 }
