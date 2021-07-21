@@ -1,64 +1,30 @@
 #include<iostream>
-#include<vector>
 #include<algorithm>
+#include<vector>
 
 using namespace std;
 
+const int N = 1e5;
+
 int main(){
-	
-	long long int n, m, i = 0, j = 0, c = 1, temp, add = 1, broken = 0;
-	long long unsigned int sum = 0, ans = 1;
-	vector<int> s;
-	
-	cin >> n >> m;
-	
-	while(i < m){
-		cin >> j;
-		s.push_back(j);
-		i++;
-	};
-	
-	for(i = 1; i <= n; i++){
-		
-		if(broken > 1){
-			cout << 0;
-			exit(0);
-		}
-						
-		else{
-			
-			if(binary_search(s.begin(), s.end(), i) == 0 && i < n){
-				c++;
-				broken = 0;
-			}
-			
-			else{
-							
-				if(i == n){
-					c++;
-				}
-				else{
-					broken++;
-				}	
-							
-//				cout << " C: " << c << endl;				
-				for(j = 0; j < c; j++){
-					temp = sum;
-					sum += add;
-					sum %= 1000000007;
-					add = temp;
-				}
-				
-//				cout << "Sum: " << sum << endl;
-				ans *= sum;
-				ans %= 1000000007;
-				sum = c = 0;
-				add = 1;			
-			}
-		}
-	}
-	
-//	ans %= 1000000007;
-	
-	cout << ans;	
+    int n, q, l, r, v;
+    int i, j;
+    vector<int> arr (N);
+    
+    cin >> n >> q;
+            
+    for(i = 1; i <= n; i++){
+        arr[i] += i;
+    }
+    
+    for(i = 0; i < q; i++){
+        cin >> l >> r >> v;
+        
+        for(j = l; j <= r; j++){
+            arr[j] += v;
+        }        
+    } 
+    
+    cout << *max_element(arr.begin(), arr.end());    
+        
 }
