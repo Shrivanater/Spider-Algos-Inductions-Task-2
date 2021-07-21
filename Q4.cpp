@@ -20,9 +20,6 @@ int main(){
 	
 	for(i = 1; i <= n; i++){
 		
-//		cout<< "i: " << i << endl;
-//		cout << "broken: " << broken << endl;
-		
 		if(broken > 1){
 			cout << 0;
 			exit(0);
