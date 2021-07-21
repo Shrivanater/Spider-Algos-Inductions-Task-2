@@ -1,27 +1,62 @@
 #include<iostream>
+#include<vector>
+#include<algorithm>
 
 using namespace std;
 
-const int n = 100;
-
 int main(){
-	int N, i, A[n], B[n], sum = 0;
-	
-	cin >> N;
-	for(i = 0; i < N-1; i++)
-		cin >> B[i];
-	
-	A[0] = B[0];
-	A[N-1] = B[N-2];
-	sum += A[0] + A[N-1];
-	
-	for(i = 1; i < N-1; i++){
-		if(B[i]<B[i-1])
-			A[i] = B[i];
-		else
-			A[i] = B[i-1];
-		sum += A[i];
-	}
-	
-	cout << sum;
+    
+    long long int n, m, i = 0, j = 0, c = 1, temp, add = 1, broken = 0;
+    long long unsigned int sum = 0, ans = 1;
+    vector<int> s;
+    
+    cin >> n >> m;
+    
+    while(i < m){
+        cin >> j;
+        s.push_back(j);
+        i++;
+    };
+    
+    for(i = 1; i <= n; i++){
+        
+        if(broken > 1){
+            cout << 0;
+            exit(0);
+        }
+                        
+        else{
+            
+            if(binary_search(s.begin(), s.end(), i) == 0 && i < n){
+                c++;
+                broken = 0;
+            }
+            
+            else{
+                            
+                if(i == n){
+                    c++;
+                }
+                else{
+                    broken++;
+                }    
+                
+                for(j = 0; j < c; j++){
+                    temp = sum;
+                    sum += add;
+                    sum %= 1000000007;
+                    add = temp;
+                }
+
+                ans *= sum;
+                ans %= 1000000007;
+                sum = c = 0;
+                add = 1;            
+            }
+        }
+    }
+    
+    ans %= 1000000007;
+    
+    cout << ans;    
 }
