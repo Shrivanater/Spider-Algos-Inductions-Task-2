@@ -1,4 +1,5 @@
 # Spider-Algos-Inductions-Task-2
+//The raw is better formatted//
 
 Q1:
     I'm using count to check for open and closed brackets, incrementing and decrementing respectively.
